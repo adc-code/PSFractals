@@ -1,2 +1,3 @@
 # PSFractals
-Fractals in postscript
+
+Fractals in postscript, including the sierpinski gasket and carpet.
