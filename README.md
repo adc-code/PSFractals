@@ -1,3 +1,6 @@
 # PSFractals
 
-Fractals in postscript, including the sierpinski gasket and carpet.
+Fractals in postscript, including the:
+* sierpinski gasket and carpet
+* pentaflake
+* hexflake
