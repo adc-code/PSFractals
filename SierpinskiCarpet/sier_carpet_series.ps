@@ -1,0 +1,87 @@
+%!PS-Adobe-2.0
+%%CreationDate: 04/20/2020
+%%End Comments
+
+
+% utility functions...
+/inch   { 72 mul } def
+/side   { 1 inch } def
+/blue   { 0 0.5 1.0 } def
+
+
+% Used to draw a square
+/square {
+    newpath
+        0 0 moveto
+        side    0 lineto
+        side side lineto
+        0    side lineto
+    closepath 
+
+    % fill in the path in blue and outline it in black (of 0.5 width)
+    gsave blue setrgbcolor fill   grestore
+    0.5 setlinewidth 0 setgray stroke 
+} def
+
+
+% Utility functions used to make the fractal 
+/third   { 1 3 div } def
+/iterate { third third scale dup sier4 } def
+/moveOne { third side mul } def
+/moveTwo { moveOne 2 mul  } def
+
+
+% The positions of all the various elements...
+/XPos [ 0 moveOne moveTwo 0 moveTwo 0 moveOne moveTwo ] def
+/YPos [ 0 0 0 moveOne moveOne moveTwo moveTwo moveTwo ] def
+
+% function that makes the fractal...
+/sier4 {
+    dup 0 gt
+    {
+        % subtract 1 to go to the next level
+        1 sub
+
+        % use a for loop to deal with each element of the fractal
+        0 1 7
+        { 
+            gsave
+                dup XPos exch get exch YPos exch get  translate 
+                iterate
+            grestore
+        } for
+        pop
+    }
+    { 
+        pop square
+    }
+    ifelse
+} def
+
+
+% Used to position the fractal...
+/length  { 3.00 } def
+/space   { 0.50 } def
+/numCols { 2 } def
+/numRows { 3 } def
+
+/leftMar { 8.5 length numCols mul  space numCols 1 sub mul  add  sub  2 div  inch } def
+/botMar  { 11 length numRows mul  space numCols 1 sub mul  add  sub  2 div  space 2 div sub inch } def
+/xPos    { numCols mod length space add mul inch leftMar add } def 
+/yPos    { numCols idiv numRows 1 sub exch sub  length space add mul  inch  botMar add } def
+
+
+% create a set of fractal for all iterations...
+0 1 numCols numRows mul 1 sub {
+    dup dup 
+    gsave
+        xPos exch yPos  translate
+        length length scale
+        sier4
+    grestore
+} for
+
+
+showpage
+
+
