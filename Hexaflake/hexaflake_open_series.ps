@@ -1,0 +1,91 @@
+%!PS-Adobe-2.0
+%%CreationDate: 04/20/2020
+%%End Comments
+
+
+% utility functions...
+/inch { 72 mul } def
+/alpha { 1 inch } def
+
+
+% Used to draw a square
+/hexagon {
+    gsave
+        alpha 60 cos -1 mul mul alpha 60 sin -1 mul mul translate
+        newpath
+            0 0 moveto
+            5 { 2 alpha 60 cos mul mul 0 rlineto 60 rotate } repeat
+        closepath 
+
+        % fill in the path in black and outline it in white (of 0 width)
+        gsave 0.9 0.18 0 setrgbcolor fill   grestore
+        0 setlinewidth 0 setgray stroke 
+    grestore 
+} def
+
+
+% SF --> Scaling Factor 
+/sf { 1 3 div } def
+
+
+% function that makes the fractal...
+/hexaflake {
+    dup 0 gt
+    {
+        % subtract 1 to go to the next level
+        1 sub
+
+        % use a for loop to deal with the 5 elements around the pentagon
+        0 1 5 
+        {
+            gsave
+                60 mul 30 add rotate
+                sf sf scale
+                0 -2 alpha mul translate
+                30 rotate 
+                dup hexaflake 
+            grestore
+        } for
+        pop 
+    }
+    {
+         pop hexagon  
+    }
+    ifelse
+
+} def
+
+
+
+/length  { 1.5 } def
+/space   { 0.50 } def
+/numCols { 2 } def
+/numRows { 3 } def
+
+/botTopMar { 1 inch } def
+
+/col1 { 2.125 inch } def
+/col2 { 6.375 inch } def
+/row1 { 11 inch botTopMar 2 mul sub 6 div 5 mul botTopMar add } def 
+/row2 { 11 inch botTopMar 2 mul sub 6 div 3 mul botTopMar add } def 
+/row3 { 11 inch botTopMar 2 mul sub 6 div 1 mul botTopMar add } def 
+
+% not the best... but ok for this silly bit of code...
+/XPos  [ col1 col2 col1 col2 col1 col2 ] def  
+/YPos  [ row1 row1 row2 row2 row3 row3 ] def  
+
+
+% create a set of fractal for all iterations...
+0 1 numCols numRows mul 1 sub {
+    dup dup 
+    gsave
+        dup XPos exch get exch YPos exch get  translate  
+        length length scale
+        hexaflake
+    grestore
+} for
+
+
+showpage
+
+
