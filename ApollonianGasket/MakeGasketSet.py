@@ -23,8 +23,8 @@ psFile.write ('/inch { 72 mul } def\n')
 psFile.write ('\n')
 
 
-Radius  = 0.9
-MaxIter = 9
+Radius  =  0.9
+MaxIter = 10 
 
 for i in range (0, 4):
 
@@ -51,6 +51,8 @@ for i in range (0, 4):
         psFile.write ('gsave\n')
         psFile.write ('save\n')
         psFile.write ('/showpage {} def\n')
+        psFile.write ('0 setgray 0 setlinecap 1 setlinewidth\n')
+        psFile.write ('0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath\n')
         psFile.write (str(xOffset) + ' inch ' + str(yOffset) + ' inch translate\n')
         psFile.write ('(' + EPSFileName + ') run\n')
         psFile.write ('restore\n')
