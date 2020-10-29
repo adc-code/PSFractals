@@ -1,0 +1,114 @@
+
+/level 7 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+
+/length { 7 inch } def
+/lineWidthFactor 10 def
+
+
+/DownRightUp
+{
+    level 0 gt
+    {
+        Dec_level   % /level level 1 sub def
+        RightDownLeft Down DownRightUp Right DownRightUp Up LeftUpRight
+        Inc_level   %/level level 1 add def
+    } if
+} def
+
+
+/UpLeftDown
+{
+    level 0 gt
+    {
+        Dec_level   % /level level 1 sub def
+        LeftUpRight Up UpLeftDown Left UpLeftDown Down RightDownLeft
+        Inc_level   %/level level 1 add def
+    } if
+} def
+
+
+/LeftUpRight
+{
+    level 0 gt
+    {
+        Dec_level  % /level level 1 sub def
+        UpLeftDown Left LeftUpRight Up LeftUpRight Right DownRightUp
+        Inc_level  % /level level 1 add def
+    } if
+} def
+
+
+/RightDownLeft 
+{
+    level 0 gt
+    {
+        Dec_level  % /level level 1 sub def
+        DownRightUp Right RightDownLeft Down RightDownLeft Left UpLeftDown
+        Inc_level  % /level level 1 add def
+    } if
+} def
+
+
+/Up
+{
+    0 length rlineto
+    % 0 1 rlineto
+} def
+
+
+/Down
+{
+    0 -1 length mul rlineto
+    % 0 -1 rlineto
+} def
+
+
+/Left
+{
+    length 0 rlineto
+    % 1 0 rlineto
+} def
+
+
+/Right
+{
+    -1 length mul 0 rlineto
+    %-1 0 rlineto
+} def
+
+
+/MakeHilbertCurve
+{
+    gsave
+
+        newpath
+
+        2 setlinecap
+        /length length 2 level exp 1 sub div def
+        /linewidth length lineWidthFactor div def
+        linewidth setlinewidth 
+
+        0 0 moveto
+        2 level 1 add exp 2 sub dup 1 add div dup scale
+        linewidth 2 div dup rmoveto
+
+        UpLeftDown
+
+        stroke
+
+    grestore
+
+} def
+
+
+
+0.75 inch 2 inch translate
+MakeHilbertCurve
+
+
+showpage
+
