@@ -8,3 +8,4 @@ Currently the set includes:
 * pentaflake
 * hexflake
 * Apollonian gasket
+* Hilbert curve
