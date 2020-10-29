@@ -1,0 +1,150 @@
+
+/level 1 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+
+/baseLength { 7 inch } def
+/sideLength { baseLength } def
+
+/lineWidthFactor 2 def
+
+0.35 0.00 0.70 setrgbcolor
+
+
+/DownRightUp
+{
+    level 0 gt
+    {
+        Dec_level   
+        RightDownLeft Down DownRightUp Right DownRightUp Up LeftUpRight
+        Inc_level   
+    } if
+} def
+
+
+/UpLeftDown
+{
+    level 0 gt
+    {
+        Dec_level  
+        LeftUpRight Up UpLeftDown Left UpLeftDown Down RightDownLeft
+        Inc_level 
+    } if
+} def
+
+
+/LeftUpRight
+{
+    level 0 gt
+    {
+        Dec_level 
+        UpLeftDown Left LeftUpRight Up LeftUpRight Right DownRightUp
+        Inc_level 
+    } if
+} def
+
+
+/RightDownLeft 
+{
+    level 0 gt
+    {
+        Dec_level 
+        DownRightUp Right RightDownLeft Down RightDownLeft Left UpLeftDown
+        Inc_level 
+    } if
+} def
+
+
+/Up
+{
+    0 sideLength rlineto
+} def
+
+
+/Down
+{
+    0 -1 sideLength mul rlineto
+} def
+
+
+/Left
+{
+    sideLength 0 rlineto
+} def
+
+
+/Right
+{
+    -1 sideLength mul 0 rlineto
+} def
+
+
+/MakeHilbertCurve
+{
+    gsave
+
+        newpath
+
+        2 setlinecap
+        /sideLength baseLength 2 level exp 1 sub div def
+        /linewidth sideLength lineWidthFactor div def
+        linewidth setlinewidth 
+
+        0 0 moveto
+        2 level 1 add exp 2 sub dup 1 add div dup scale
+        linewidth 2 div dup rmoveto
+
+        UpLeftDown
+
+        stroke
+
+    grestore
+
+} def
+
+
+/baseLength { 3 inch } def
+
+gsave
+    /level 1 def
+    1 inch 7.5 inch translate
+    MakeHilbertCurve
+grestore
+
+gsave
+    /level 2 def
+    4.5 inch 7.5 inch translate
+    MakeHilbertCurve
+grestore
+
+gsave
+    /level 3 def
+    1 inch 4 inch translate
+    MakeHilbertCurve
+grestore
+
+gsave
+    /level 4 def
+    4.5 inch 4 inch translate
+    MakeHilbertCurve
+grestore
+
+gsave
+    /level 5 def
+    1 inch 0.5 inch translate
+    MakeHilbertCurve
+grestore
+
+gsave
+    /level 6 def
+    4.5 inch 0.5 inch translate
+    MakeHilbertCurve
+grestore
+
+
+showpage
+
+
+
