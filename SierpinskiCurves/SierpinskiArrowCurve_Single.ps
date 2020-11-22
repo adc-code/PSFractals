@@ -1,0 +1,166 @@
+
+/level 1 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+
+/baselength { 7 inch } def
+/length { baselength } def
+
+
+
+/UpRight_FlatRight_DownRight
+{
+    level 0 gt
+    {
+        Dec_level  
+        FlatRight_UpRight_UpLeft  UpRight  UpRight_FlatRight_DownRight  FlatRight  DownLeft_DownRight_FlatRight  DownRight
+        Inc_level 
+    } if
+} def
+
+
+
+/FlatRight_UpRight_UpLeft
+{
+    level 0 gt
+    {
+        Dec_level  
+        UpRight_FlatRight_DownRight  FlatRight  FlatRight_UpRight_UpLeft  UpRight  FlatLeft_UpLeft_UpRight  UpLeft
+        Inc_level
+    } if
+} def
+
+
+/FlatLeft_UpLeft_UpRight
+{
+    level 0 gt
+    {
+        Dec_level  
+        UpLeft_FlatLeft_DownLeft FlatLeft  FlatLeft_UpLeft_UpRight UpLeft FlatRight_UpRight_UpLeft UpRight
+        Inc_level
+    } if
+} def
+
+
+/UpLeft_FlatLeft_DownLeft
+{
+    level 0 gt
+    {
+        Dec_level  
+        FlatLeft_UpLeft_UpRight UpLeft UpLeft_FlatLeft_DownLeft FlatLeft DownRight_DownLeft_FlatLeft DownLeft 
+        Inc_level
+    } if
+} def
+
+
+/DownLeft_DownRight_FlatRight
+{
+    level 0 gt
+    {
+        Dec_level  
+        DownRight_DownLeft_FlatLeft  DownLeft  DownLeft_DownRight_FlatRight  DownRight  UpRight_FlatRight_DownRight  FlatRight
+        Inc_level
+    } if
+} def
+
+
+/DownRight_DownLeft_FlatLeft
+{
+    level 0 gt
+    {
+        Dec_level
+        DownLeft_DownRight_FlatRight DownRight  DownRight_DownLeft_FlatLeft DownLeft UpLeft_FlatLeft_DownLeft FlatLeft
+        Inc_level
+    } if
+} def
+
+ 
+/UpRight
+{
+    level 0 eq
+    {
+        length 2 div  length 2 div 3 sqrt mul  rlineto
+    } if
+} def
+
+
+/DownRight
+{
+    level 0 eq
+    {
+        length 2 div  length 2 div 3 sqrt mul -1 mul  rlineto
+    } if
+} def
+
+
+/FlatRight
+{
+    level 0 eq
+    {
+        length  0  rlineto
+    } if
+} def
+
+
+/FlatLeft
+{
+    level 0 eq
+    {
+        length -1 mul  0  rlineto
+    } if
+} def
+
+
+/UpLeft
+{
+    level 0 eq
+    {
+        length 2 div -1 mul  length 2 div 3 sqrt mul  rlineto
+    } if
+} def
+
+
+/DownLeft
+{
+    level 0 eq
+    {
+        length 2 div -1 mul  length 2 div 3 sqrt mul -1 mul  rlineto
+    } if
+} def
+
+
+/MakeSierpinkskiArrow
+{
+    gsave
+        
+        newpath
+
+        /length baselength 2 level exp div def
+
+        0 0 moveto
+        UpRight_FlatRight_DownRight       
+
+        stroke
+
+    grestore
+
+} def
+
+
+
+8.5 inch baselength sub 2 div  11 inch baselength 2 div 3 sqrt mul sub 2 div translate
+
+
+2 setlinecap
+0 setlinewidth
+
+/level 8 def
+MakeSierpinkskiArrow
+
+
+showpage
+
+
+
