@@ -1,0 +1,124 @@
+179 255 div 45 255 div 0 setrgbcolor
+
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 3 inch } def
+
+
+/F { baselength } def
+/G { 4 3 div F mul } def
+
+/DrawF { F 0 rlineto } def
+/DrawG { G 0 rlineto } def
+/Minus { -45 rotate } def
+/Plus  {  45 rotate } def
+
+
+/RuleX 
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % X -> XF+G+XF--F--XF+G+X
+        RuleX DrawF Plus DrawG Plus RuleX DrawF Minus Minus DrawF Minus Minus RuleX DrawF Plus DrawG Plus RuleX
+        Inc_level
+    } if
+} def
+
+
+/Axiom
+{
+    % F--XF--F--XF
+    DrawF Minus Minus RuleX DrawF Minus Minus DrawF Minus Minus RuleX DrawF
+} def
+
+
+% length
+%
+% level 0  -->    F
+% level 1  -->   3F + 2 (1/sqrt2) kF
+% level 2  -->   7F + 6 (1/sqrt2) kF
+% level 3  -->  15F + 14 (1/sqrt2) kF
+% level 4  -->  31F + 30 (1/sqrt2) kF
+%
+% In general... 
+% (2^(level+1) - 1)F + (2^(level+1) - 2)(1/sqrt2) kF 
+
+/DiagLength { 2 level 1 add exp 1 sub F mul  2 level 1 add exp 2 sub 1 2 sqrt div mul G mul  add } def
+
+
+/MakeSierpinkskiCurve 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    fill 
+    %stroke
+    grestore
+} def
+
+
+/HSpace {  8.5 inch baselength DiagLength div baselength mul 2 mul sub 3 div  } def
+/VSpace {   11 inch baselength 3 mul sub 4 div  } def
+
+/level 0 def
+gsave
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub  11 inch VSpace sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+/level 1 def
+gsave
+    8.5 inch 4 div 3 mul baselength DiagLength div baselength mul 2 div sub  11 inch VSpace sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+/level 2 def
+gsave
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub   11 inch VSpace 2 mul sub baselength sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+/level 3 def
+gsave
+    8.5 inch 4 div 3 mul baselength DiagLength div baselength mul 2 div sub  11 inch VSpace 2 mul sub baselength sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+/level 4 def
+gsave
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub   11 inch VSpace 3 mul sub baselength 2 mul sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+/level 5 def
+gsave
+    8.5 inch 4 div 3 mul baselength DiagLength div baselength mul 2 div sub  11 inch VSpace 3 mul sub baselength 2 mul sub  translate
+    gsave
+        baselength DiagLength div dup scale
+        MakeSierpinkskiCurve
+    grestore
+grestore
+
+
+showpage
+
+
