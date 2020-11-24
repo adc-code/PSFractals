@@ -1,0 +1,84 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 7 inch } def
+
+0 setlinecap
+%38 255 div 0 255 div 77 255 div setrgbcolor
+
+/A { baselength } def
+/B { baselength } def
+
+
+/DrawA { A 0 rlineto } def
+/DrawB { B 0 rlineto } def
+/Minus { -60 rotate } def
+/Plus  {  60 rotate } def
+
+
+/RuleA 
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % A -> A-B--B+A++AA+B-
+        RuleA Minus RuleB Minus Minus RuleB Plus RuleA Plus Plus RuleA RuleA Plus RuleB Minus
+        Inc_level
+    } 
+    {
+        DrawA
+    } ifelse
+} def
+
+
+/RuleB
+{
+    level 0 gt
+    {
+        Dec_level
+        % B -> +A-BB--B-A++A+B
+        Plus RuleA Minus RuleB RuleB Minus Minus RuleB Minus RuleA Plus Plus RuleA Plus RuleB
+        Inc_level
+    } 
+    {
+        DrawB
+    } ifelse
+} def
+
+
+/Axiom
+{
+    % A
+    RuleA
+} def
+
+
+/MakeGosperCurve 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    stroke
+    grestore
+} def
+
+
+
+/level 6 def
+gsave
+    0 setlinewidth
+    7.5 inch  8 inch  translate
+    gsave
+        1 7 sqrt 6 exp div dup scale
+        MakeGosperCurve
+    grestore
+grestore
+
+showpage
+
+
+
