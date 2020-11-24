@@ -10,3 +10,4 @@ Currently the set includes:
 * hexflake
 * Apollonian gasket
 * Hilbert curve
+* Gosper curve
