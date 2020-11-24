@@ -5,6 +5,7 @@ Various famous fractals writen either directly or indirectly in postscript.  All
 Currently the set includes:
 * Sierpinski gasket
 * Sierpinski carpet
+* Sierpinski curve and arrowhead curve 
 * pentaflake
 * hexflake
 * Apollonian gasket
