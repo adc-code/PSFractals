@@ -61,12 +61,12 @@
 } def
 
 
-/HSpace {  8.5 inch baselength DiagLength div baselength mul 2 mul sub 3 div  } def
+/HSpace {  8.5 inch baselength 2 mul sub 3 div 2 div } def
 /VSpace {   11 inch baselength 3 mul sub 4 div  } def
 
 /level 0 def
 gsave
-    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub  11 inch VSpace sub  translate
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub HSpace add 11 inch VSpace sub  translate
     gsave
         baselength DiagLength div dup scale
         MakeSierpinkskiCurve
@@ -75,7 +75,7 @@ grestore
 
 /level 1 def
 gsave
-    8.5 inch 4 div 3 mul baselength DiagLength div baselength mul 2 div sub  11 inch VSpace sub  translate
+    8.5 inch 4 div 3 mul baselength DiagLength div baselength mul 2 div sub    11 inch VSpace sub  translate
     gsave
         baselength DiagLength div dup scale
         MakeSierpinkskiCurve
@@ -84,7 +84,7 @@ grestore
 
 /level 2 def
 gsave
-    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub   11 inch VSpace 2 mul sub baselength sub  translate
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub HSpace add  11 inch VSpace 2 mul sub baselength sub  translate
     gsave
         baselength DiagLength div dup scale
         MakeSierpinkskiCurve
@@ -102,7 +102,7 @@ grestore
 
 /level 4 def
 gsave
-    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub   11 inch VSpace 3 mul sub baselength 2 mul sub  translate
+    8.5 inch 4 div baselength DiagLength div baselength mul 2 div sub HSpace add  11 inch VSpace 3 mul sub baselength 2 mul sub  translate
     gsave
         baselength DiagLength div dup scale
         MakeSierpinkskiCurve
