@@ -1,0 +1,129 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 2.5 inch } def
+/heightEst { 3 inch } def
+
+0 setlinecap
+%38 255 div 0 255 div 77 255 div setrgbcolor
+
+
+/DrawF { baselength 0 rlineto } def
+
+/Minus { -60 rotate } def
+/Plus  {  60 rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F-F++F-F
+        RuleF Minus RuleF Plus Plus RuleF Minus RuleF
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+
+/Axiom
+{
+    % F++F++F
+    RuleF Plus Plus RuleF Plus Plus RuleF
+} def
+
+
+/MakeKochSnowflake 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    closepath
+    gsave 230 255 div 242 255 div 255 255 div setrgbcolor fill grestore
+    stroke
+    grestore
+} def
+
+
+/xSpace 8.5 inch baselength 2 mul sub 3 div def
+/ySpace 10.5 inch heightEst 3 mul sub 4 div def
+
+
+/level 0 def
+gsave
+    2.53 level exp setlinewidth
+    xSpace 11.5 inch heightEst ySpace add sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+/level 1 def
+gsave
+    2.53 level exp setlinewidth
+    xSpace 2 mul baselength add  11.5 inch heightEst ySpace add sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+/level 2 def
+gsave
+    2.43 level exp setlinewidth
+    xSpace   11.5 inch heightEst ySpace add 2 mul sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+/level 3 def
+gsave
+    2.43 level exp setlinewidth
+    xSpace 2 mul baselength add  11.5 inch heightEst ySpace add 2 mul sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+/level 4 def
+gsave
+    2.33 level exp setlinewidth
+    xSpace   11.5 inch heightEst ySpace add 3 mul sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+/level 5 def
+gsave
+    2.33 level exp setlinewidth
+    xSpace 2 mul baselength add  11.5 inch heightEst ySpace add 3 mul sub  translate
+    gsave
+        1 3 div level exp dup scale
+        MakeKochSnowflake
+    grestore
+grestore
+
+
+showpage
+
+
+
