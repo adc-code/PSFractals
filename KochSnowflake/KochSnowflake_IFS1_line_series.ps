@@ -1,0 +1,90 @@
+%!PS-Adobe-2.0
+
+% note: need to use the following param when generating the PDF
+%   ps2pdf -dNOSAFER <PS_FILE_CONTAINING_REFS_TO_EPS_FILES.ps>
+
+
+/inch { 72 mul } def
+/baselength { 2.5 inch } def
+/heightEst { 3 inch } def
+
+/xSpace 8.5 inch baselength 2 mul sub 3 div def
+/ySpace 10.5 inch heightEst 3 mul sub 4 div def
+/sf baselength 7 inch div def
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 11.5 inch heightEst ySpace add sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter0.eps) run
+restore
+grestore
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 2 mul baselength add  11.5 inch heightEst ySpace add sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter1.eps) run
+restore
+grestore
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 11.5 inch heightEst ySpace add 2 mul sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter2.eps) run
+restore
+grestore
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 2 mul baselength add  11.5 inch heightEst ySpace add 2 mul sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter3.eps) run
+restore
+grestore
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 11.5 inch heightEst ySpace add 3 mul sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter4.eps) run
+restore
+grestore
+
+
+gsave
+save
+/showpage {} def
+0 setgray 0 setlinecap 1 setlinewidth
+0 setlinejoin 10 setmiterlimit [ ] 0 setdash newpath
+xSpace 2 mul baselength add  11.5 inch heightEst ySpace add 3 mul sub  translate
+sf sf scale
+(KochSnowflake_IFS1_line_iter5.eps) run
+restore
+grestore
+
+
+showpage
+
+
