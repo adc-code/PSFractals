@@ -11,3 +11,4 @@ Currently the set includes:
 * Apollonian gasket
 * Hilbert curve
 * Gosper curve
+* Koch snowflake
