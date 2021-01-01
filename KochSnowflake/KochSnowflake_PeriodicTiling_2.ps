@@ -1,0 +1,231 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 1 inch } def
+
+0 setlinecap
+
+
+/DrawF { baselength 0 rlineto } def
+
+/Minus { -60 rotate } def
+/Plus  {  60 rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F-F++F-F
+        RuleF Minus RuleF Plus Plus RuleF Minus RuleF
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+
+/Axiom
+{
+    % F++F++F
+    RuleF Plus Plus RuleF Plus Plus RuleF
+} def
+
+
+/MakeKochSnowflake 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    closepath
+    gsave  194 255 div  209 255 div  240 255 div  setrgbcolor  fill   grestore
+    stroke
+    grestore
+} def
+
+
+/width 2.5 inch def
+/height width 2 3 sqrt div mul def
+/xOffset 8.5 inch width sub 2 div def
+/yOffset 11 inch height sub 2 div height 4 div add def
+
+
+newpath
+5 setlinewidth
+0.25 inch 0.25 inch moveto
+8 inch 0 rlineto
+0 10.5 inch rlineto
+-8 inch 0 rlineto
+closepath
+gsave 36 255 div  71 255 div  143 255 div setrgbcolor fill grestore
+%stroke
+clip
+
+/level 4 def
+gsave
+    20 setlinewidth
+
+    gsave
+        xOffset  yOffset  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 2 3 div mul add   yOffset height 2 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -1 3 div mul add   yOffset height 5 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -4 3 div  mul add   yOffset height 1 mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 1 3 div mul add   yOffset height 3 2 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -2 3 div  mul add   yOffset height 5 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -5 3 div  mul add   yOffset height 11 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 4 3 div  mul add   yOffset height 4 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 1 mul add   yOffset height 13 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 5 3 div mul add   yOffset height 1 2 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -1 mul add   yOffset height 1 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -2 mul add   yOffset height 1 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 1 mul add   yOffset height -1 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 2 mul add   yOffset height -1 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -2 3 div mul add   yOffset height -2 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -5 3 div mul add   yOffset height -1 2 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 1 3 div mul add   yOffset height -5 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width 4 3 div mul add   yOffset height -1 mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -4 3 div mul add   yOffset height -4 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -4 3 div mul add   yOffset height -4 3 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave
+        xOffset width -2 mul add   yOffset height -2 mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave 
+        xOffset width -1 3 div mul add   yOffset height -3 2 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave 
+        xOffset width 2 3 div mul add   yOffset height -10 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave 
+        xOffset width 5 3 div mul add   yOffset height -11 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+    gsave 
+        xOffset width -1 mul add   yOffset height -13 6 div mul add  translate
+        1 3 div level exp 2.5 mul dup scale
+        MakeKochSnowflake
+    grestore
+
+grestore
+
+
+showpage
+
+
+
