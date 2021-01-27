@@ -1,24 +1,44 @@
 #
 # MakeKochAperiodicTiling.py
-# -One off program used to make Aperiodic recursive tilings of the Koch snowflake curve.
+# One off program used to make Aperiodic recursive tilings of the Koch snowflake curve.
 #
 
+print ('Writing to file... tmpKochAPeriodicTiling.ps')
 
 f = open ('tmpKochAPeriodicTiling.ps', 'w')
 
-f.write ('/level 0 def \n/Inc_level { /level level 1 add def } def \n/Dec_level { /level level 1 sub def } def \n')
-f.write ('/inch { 72 mul } def \n/baselength { 1 inch } def\n\n')
+f.write ('/level 0 def \n')
+f.write ('/Inc_level { /level level 1 add def } def \n')
+f.write ('/Dec_level { /level level 1 sub def } def \n')
+f.write ('/inch { 72 mul } def \n')
+f.write ('/baselength { 1 inch } def\n\n')
 
 f.write ('0 setlinecap\n\n')
 
-f.write ('/DrawF { baselength 0 rlineto } def\n\n')
+f.write ('/DrawF { baselength 0 rlineto } def \n\n')
 
-f.write ('/Minus { -60 rotate } def \n/Plus  {  60 rotate } def\n\n')
+f.write ('/Minus { -60 rotate } def \n')
+f.write ('/Plus  {  60 rotate } def \n\n')
 
-f.write ('/RuleF\n{\n   level 0 gt\n   {\n       Dec_level\n       % F -> F-F++F-F\n      RuleF Minus RuleF Plus Plus RuleF Minus RuleF\n')
-f.write ('      Inc_level\n    }\n    {\n      DrawF\n    } ifelse\n} def\n\n')
+f.write ('/RuleF \n')
+f.write ('{\n')
+f.write ('   level 0 gt\n')
+f.write ('   {\n')
+f.write ('       Dec_level\n')
+f.write ('       % F -> F-F++F-F\n')
+f.write ('       RuleF Minus RuleF Plus Plus RuleF Minus RuleF \n')
+f.write ('       Inc_level\n')
+f.write ('   }\n')
+f.write ('   {\n')
+f.write ('       DrawF\n')
+f.write ('   } ifelse\n')
+f.write ('} def\n\n')
 
-f.write ('/Axiom\n{\n   % F++F++F\n   RuleF Plus Plus RuleF Plus Plus RuleF\n} def\n\n')
+f.write ('/Axiom\n')
+f.write ('{\n')
+f.write ('   % F++F++F\n')
+f.write ('   RuleF Plus Plus RuleF Plus Plus RuleF\n')
+f.write ('} def\n\n')
 
 f.write ('/MakeKochSnowflake\n')
 f.write ('{\n')
@@ -41,8 +61,10 @@ f.write ('/level 4 def\n\n')
 
 f.write ('xCenter yCenter translate\n')
 
+# note for now we are just using a preset set of colours
 colors = [ [ 204, 239, 255 ], [ 128, 215, 255 ], [ 51, 190, 255], [ 0, 157, 230 ], [ 0, 105, 153], [ 0, 52, 77], [ 0, 17, 26] ]
 #colors.reverse ()
+
 normColors = []
 for col in colors:
     normCol = []
@@ -107,5 +129,6 @@ f.write ('grestore\n')
 f.write ('showpage\n')
 
 f.close ()
+
 
 
