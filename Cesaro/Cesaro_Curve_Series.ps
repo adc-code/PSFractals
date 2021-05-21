@@ -1,0 +1,86 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 0.75 inch } def
+/alpha { 87 } def
+/level 5 def
+
+0 setlinecap
+
+/DrawF { baselength 0 rlineto } def
+
+/Minus { -1 alpha mul rotate } def
+/Plus  { alpha rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F+F--F+F
+        RuleF Plus RuleF Minus Minus RuleF Plus RuleF
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+
+/Axiom
+{
+    % The 4 calls to RuleF cause curves on each side
+    RuleF
+} def
+
+
+/MakeCesaroCurveFractal 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    gsave stroke grestore
+    grestore
+} def
+
+
+0.75 inch 0.4 inch translate
+
+/level 7 def
+
+gsave
+
+    /alpha 0 def
+    15 rotate
+    0 setlinewidth
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeCesaroCurveFractal
+    grestore
+
+    1 1 17
+    {
+        5 mul /alpha exch def
+        baselength 0 translate
+        5 rotate
+        gsave
+            gsave
+                1 1 alpha cos add 2 mul div level exp dup scale
+                MakeCesaroCurveFractal
+            grestore
+        grestore
+    } for
+
+grestore
+
+
+showpage
+
+
+
