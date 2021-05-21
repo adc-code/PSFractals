@@ -1,0 +1,122 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 3 inch } def
+/alpha { 87 } def
+/level 5 def
+
+0 setlinecap
+
+/DrawF { baselength 0 rlineto } def
+
+/Minus { -1 alpha mul rotate } def
+/Plus  { alpha rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F+F--F+F
+        RuleF Plus RuleF Minus Minus RuleF Plus RuleF
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+
+/Axiom
+{
+    % The 4 calls to RuleF cause curves on each side
+    RuleF
+    90 rotate RuleF
+    90 rotate RuleF
+    90 rotate RuleF
+} def
+
+
+/MakeTornSquareFractal 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    closepath
+    gsave 208 255 div 225 255 div 225 255 div  setrgbcolor fill grestore
+    gsave stroke grestore
+    grestore
+} def
+
+
+/level 0 def
+gsave
+    2 level exp setlinewidth
+    1 inch  7.5 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+/level 1 def
+gsave
+    2 level exp setlinewidth
+    4.5 inch  7.5 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+/level 2 def
+gsave
+    2 level exp setlinewidth
+    1 inch  4.0 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+/level 3 def
+gsave
+    2 level exp setlinewidth
+    4.5 inch  4.0 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+/level 4 def
+gsave
+    2 level exp setlinewidth
+    1 inch  0.5 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+/level 5 def
+gsave
+    2 level exp setlinewidth
+    4.5 inch  0.5 inch  translate
+    gsave
+        1 1 alpha cos add 2 mul div level exp dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+
+showpage
+
+
+
