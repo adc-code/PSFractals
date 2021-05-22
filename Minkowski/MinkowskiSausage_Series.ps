@@ -1,0 +1,116 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 3.5 inch } def
+/alpha { 90 } def
+/level 5 def
+
+0 setlinecap
+
+/DrawF { baselength 0 rlineto } def
+
+/Minus { -1 alpha mul rotate } def
+/Plus  { alpha rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F+F-F-FF+F+F-F
+        RuleF Plus RuleF Minus RuleF Minus RuleF RuleF Plus RuleF Plus RuleF Minus RuleF
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+
+/Axiom
+{
+    % The 4 calls to RuleF cause curves on each side
+    RuleF
+} def
+
+
+/MakeMinkowskiSausageFractal 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    gsave stroke grestore
+    grestore
+} def
+
+
+/level 0 def
+gsave
+    0 setlinewidth
+    0.5 inch 9 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 1 def
+gsave
+    4 setlinewidth
+    4.5 inch 9 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 2 def
+gsave
+    16 setlinewidth
+    0.5 inch 5.5 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 3 def
+gsave
+    4 level exp setlinewidth
+    4.5 inch 5.5 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 4 def
+gsave
+    64 setlinewidth
+    0.5 inch 2 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 5 def
+gsave
+    0 setlinewidth
+    4.5 inch 2 inch  translate
+    gsave
+        1 4 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+showpage
+
+
+
