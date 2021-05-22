@@ -4,7 +4,7 @@
 /Dec_level { /level level 1 sub def } def
 
 /inch { 72 mul } def
-/baselength { 7.5 inch } def
+/baselength { 3.5 inch } def
 /alpha { 90 } def
 /level 5 def
 
@@ -46,31 +46,51 @@
         0 0 moveto
         Axiom
     closepath
-    gsave 236 255 div 236 255 div 248 255 div setrgbcolor fill grestore
+    gsave 217 255 div 217 255 div 242 255 div setrgbcolor fill grestore
     gsave stroke grestore
     grestore
 } def
 
 
-/level 5 def
+/level 0 def
 gsave
-    0 setlinewidth
-    %1.75 inch  3 inch  translate
-    %1.945 inch  3.2 inch  translate
-    %1.99 inch  3.24 inch  translate
-    %1.996 inch  3.246 inch  translate
-    % 1.999 inch  3.249 inch  translate
-    2 inch  3.25 inch  translate
+    1 setlinewidth
+    0.5 inch  6 inch  translate
     gsave
-        %1 6 div level exp dup scale
-        %1 26 div dup scale
-        %1 106 div dup scale
-        %1 426 div dup scale
-        1 1706 div dup scale
-        %1 6826 div dup scale
         MakeMinkowskiSausageFractal
     grestore
 grestore
+
+/level 1 def
+gsave
+    6 setlinewidth
+    5.085 inch  6.585 inch  translate
+    gsave
+        1 6 div level exp dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 2 def
+gsave
+    26 setlinewidth
+    1.175 inch 2.175 inch  translate
+    gsave
+        1 26 div dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
+/level 3 def
+gsave
+    106 setlinewidth
+    5.195 inch 2.195 inch  translate
+    gsave
+        1 106 div dup scale
+        MakeMinkowskiSausageFractal
+    grestore
+grestore
+
 
 showpage
 
