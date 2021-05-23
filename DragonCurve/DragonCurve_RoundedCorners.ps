@@ -1,0 +1,98 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 4 inch } def
+/alpha { 90 } def
+/level 1 def
+
+
+1 setlinecap
+1 setlinejoin
+
+%/DrawF { 0.8 baselength mul 0 rlineto 0.2 baselength mul dup rlineto } def
+%/DrawF { baselength 0 rlineto } def
+%/DrawF { baselength 2 div -1 baselength mul 2 div rlineto baselength 2 div    baselength 2 div rlineto } def
+
+%/Minus { -1 alpha mul rotate } def
+%/Plus  { alpha rotate } def
+
+/L { 0.1 baselength mul  0.1 alpha mul cos  div } def
+
+/DrawF { 0.4 baselength mul 0 rlineto } def
+%/Minus { -0.5 alpha mul rotate  0.35 baselength mul 2 sqrt div 0 rlineto  -0.5 alpha mul rotate } def
+%/Plus  {  0.5 alpha mul rotate  0.35 baselength mul 2 sqrt div 0 rlineto   0.5 alpha mul rotate } def
+/Minus { 10 { -0.1 alpha mul rotate  L  0 rlineto } repeat  } def
+/Plus  { 10 { 0.1 alpha mul rotate  L  0 rlineto } repeat  } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % F -> F+G
+        RuleF Plus RuleG
+        %-FX++FY-
+        %Minus DrawF RuleF Plus Plus DrawF RuleG Minus
+        %Minus RuleF Plus Plus RuleG Minus
+        Inc_level
+    } 
+    {
+        DrawF
+    } ifelse
+} def
+
+
+/RuleG
+{ 
+    level 0 gt
+    {
+        Dec_level
+        % G -> F-G
+        RuleF Minus RuleG
+        % +FX--FY+
+        %Plus DrawF RuleF Minus Minus DrawF RuleG Plus
+        %Plus RuleF Minus Minus RuleG Plus
+        Inc_level
+    }
+    {
+        DrawF
+    } ifelse
+} def
+
+/Axiom
+{
+    DrawF
+    RuleF
+    DrawF
+} def
+
+
+/MakeTornSquareFractal 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    gsave stroke grestore
+    grestore
+} def
+
+
+/level 13 def
+gsave
+    40 setlinewidth
+    6.5 inch   7 inch  translate
+    gsave
+        1 100 div dup scale
+        MakeTornSquareFractal
+    grestore
+grestore
+
+showpage
+
+
+
