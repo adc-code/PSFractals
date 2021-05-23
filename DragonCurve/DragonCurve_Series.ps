@@ -1,0 +1,131 @@
+
+/level 0 def
+/Inc_level { /level level 1 add def } def
+/Dec_level { /level level 1 sub def } def
+
+/inch { 72 mul } def
+/baselength { 2 inch } def
+/alpha { 45 } def
+/level 1 def
+
+0 setlinecap
+
+/DrawForward { 0 baselength rlineto } def
+
+/Minus { -1 alpha mul rotate } def
+/Plus  { alpha rotate } def
+
+
+/RuleF
+{ 
+    level 0 gt
+    {
+        Dec_level 
+        % X -> -FX++FY-
+        Minus RuleF Plus Plus RuleG Minus
+        Inc_level
+    } 
+    {
+        DrawForward
+    } ifelse
+} def
+
+
+/RuleG
+{ 
+    level 0 gt
+    {
+        Dec_level
+        % Y -> +FX--FY+
+        Plus RuleF Minus Minus RuleG Plus
+        Inc_level
+    }
+    {
+        DrawForward
+    } ifelse
+} def
+
+
+/Axiom
+{
+    RuleF
+} def
+
+
+/MakeDragonCurveFractal 
+{
+    gsave
+    newpath
+        0 0 moveto
+        Axiom
+    stroke 
+    grestore
+} def
+
+
+/level 0 def
+gsave
+    0 setlinewidth
+    2.5 inch   7.75 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+/level 1 def
+gsave
+    0 setlinewidth
+    5.6 inch   7.75 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+
+/level 2 def
+gsave
+    0 setlinewidth
+    2.5 inch   5 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+/level 4 def
+gsave
+    0 setlinewidth
+    5.6 inch   5 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+
+/level 8 def
+gsave
+    0 setlinewidth
+    2.5 inch   1.5 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+/level 12 def
+gsave
+    0 setlinewidth
+    5.6 inch   1.5 inch   translate
+    gsave
+        1 2 sqrt div level exp dup scale
+        MakeDragonCurveFractal
+    grestore
+grestore
+
+showpage
+
+
+
