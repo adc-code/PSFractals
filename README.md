@@ -12,3 +12,6 @@ Currently the set includes:
 * Hilbert curve
 * Gosper curve
 * Koch snowflake
+* Minkowski (island and sausage)
+* Cesaro (Curve and torn square)
+* Dragon curve
