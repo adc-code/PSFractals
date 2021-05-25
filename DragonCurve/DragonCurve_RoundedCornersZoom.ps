@@ -12,20 +12,11 @@
 1 setlinecap
 1 setlinejoin
 
-%/DrawF { 0.8 baselength mul 0 rlineto 0.2 baselength mul dup rlineto } def
-%/DrawF { baselength 0 rlineto } def
-%/DrawF { baselength 2 div -1 baselength mul 2 div rlineto baselength 2 div    baselength 2 div rlineto } def
-
-%/Minus { -1 alpha mul rotate } def
-%/Plus  { alpha rotate } def
-
-/L { 0.1 baselength mul  0.1 alpha mul cos  div } def
+/Step { 0.1 baselength mul  0.1 alpha mul cos  div } def
 
 /DrawF { 0.4 baselength mul 0 rlineto } def
-%/Minus { -0.5 alpha mul rotate  0.35 baselength mul 2 sqrt div 0 rlineto  -0.5 alpha mul rotate } def
-%/Plus  {  0.5 alpha mul rotate  0.35 baselength mul 2 sqrt div 0 rlineto   0.5 alpha mul rotate } def
-/Minus { 10 { -0.1 alpha mul rotate  L  0 rlineto } repeat  } def
-/Plus  { 10 { 0.1 alpha mul rotate  L  0 rlineto } repeat  } def
+/Minus { 10 { -0.1 alpha mul rotate Step 0 rlineto } repeat } def
+/Plus  { 10 {  0.1 alpha mul rotate Step 0 rlineto } repeat } def
 
 
 /RuleF
@@ -35,9 +26,6 @@
         Dec_level 
         % F -> F+G
         RuleF Plus RuleG
-        %-FX++FY-
-        %Minus DrawF RuleF Plus Plus DrawF RuleG Minus
-        %Minus RuleF Plus Plus RuleG Minus
         Inc_level
     } 
     {
@@ -53,9 +41,6 @@
         Dec_level
         % G -> F-G
         RuleF Minus RuleG
-        % +FX--FY+
-        %Plus DrawF RuleF Minus Minus DrawF RuleG Plus
-        %Plus RuleF Minus Minus RuleG Plus
         Inc_level
     }
     {
@@ -63,8 +48,10 @@
     } ifelse
 } def
 
+
 /Axiom
 {
+    % add some extra linear distance at the beginning and the end 
     DrawF
     RuleF
     DrawF
@@ -77,12 +64,12 @@
     newpath
         0 0 moveto
         Axiom
-    gsave stroke grestore
+    gsave 242 255 div 242 255 div 242 255 div setrgbcolor stroke grestore
     grestore
 } def
 
 
-
+% make a cliping recangle... and colour it blue
 newpath
     5 setlinewidth
     0.5 inch 0.5 inch moveto
@@ -91,14 +78,14 @@ newpath
     -7.5 inch 0 rlineto
 closepath
 gsave 0 setlinewidth stroke grestore
-gsave 0.95 setgray fill grestore
+gsave 0 255 div 0 255 div 128 255 div setrgbcolor fill grestore
 clip
 
 
 % a lot of the values below were found by trial and error
 /level 14 def
 gsave
-    40 setlinewidth
+    90 setlinewidth
     % 3 inch  5  inch  translate
     % 5 inch  5  inch  translate
     % 6 inch  5  inch  translate
